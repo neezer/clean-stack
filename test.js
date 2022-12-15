@@ -270,3 +270,22 @@ test('handle undefined', t => {
 	const expected = undefined;
 	t.is(cleanStack(stack, {pretty: true}), expected);
 });
+
+test('`pathRegex` option', t => {
+	const pathRegex = /^(?:deno|deno:[\w/]+)(?:\.js)?(?::\d+){2}/;
+	const stack = `Error: with pathRegex
+    at fail (file:///path/to/fail.ts:29:16)
+    at file:///path/to/fail.test.ts:67:3
+    at testStepSanitizer (deno:cli/js/40_testing.js:448:13)
+    at asyncOpSanitizer (deno:cli/js/40_testing.js:147:15)
+    at resourceSanitizer (deno:cli/js/40_testing.js:374:13)
+    at Object.exitSanitizer [as fn] (deno:cli/js/40_testing.js:431:15)
+    at runTest (deno:cli/js/40_testing.js:836:18)
+    at runTests (deno:cli/js/40_testing.js:1091:28)`;
+
+	const expected = `Error: with pathRegex
+    at fail (file:///path/to/fail.ts:29:16)
+    at file:///path/to/fail.test.ts:67:3`;
+	t.is(cleanStack(stack, {pathRegex}), expected);
+});
+

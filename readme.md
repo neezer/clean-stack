@@ -73,6 +73,13 @@ Example with `'/Users/sindresorhus/dev/clean-stack'` as `basePath`:
 
 `/Users/sindresorhus/dev/clean-stack/unicorn.js:2:15` → `unicorn.js:2:15`
 
+##### pathRegex
+
+Type: `RegExp?`
+Default: (See `defaultPathRegex` in index.js)
+
+Provide a custom regular expression to match the stack trace file paths to ignore.
+
 ## Related
 
 - [extract-stack](https://github.com/sindresorhus/extract-stack) - Extract the actual stack of an error
